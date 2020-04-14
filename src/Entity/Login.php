@@ -26,36 +26,6 @@ class Login
      */
     private $password;
 
-    /**
-     * @ORM\Column(type="bigint")
-     */
-    private $reference;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $address;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $products;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $cost;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $status;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -81,78 +51,6 @@ class Login
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    public function getReference(): ?string
-    {
-        return $this->reference;
-    }
-
-    public function setReference(string $reference): self
-    {
-        $this->reference = $reference;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getProducts(): ?string
-    {
-        return $this->products;
-    }
-
-    public function setProducts(string $products): self
-    {
-        $this->products = $products;
-
-        return $this;
-    }
-
-    public function getCost(): ?float
-    {
-        return $this->cost;
-    }
-
-    public function setCost(float $cost): self
-    {
-        $this->cost = $cost;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }
