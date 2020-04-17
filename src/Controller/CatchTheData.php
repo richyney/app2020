@@ -20,10 +20,9 @@ class CatchTheData extends AbstractController
         $type = $request->request->get('type', 'none');
         if($type == 'checkifusernameexists'){
             
-             // catch the username
+             // catch the username and password
              $name = $request->request->get('un', 'this is the default word');
-            
-            
+          
              $repository = $this->getDoctrine()->getRepository(Login::class);
 
           
@@ -43,7 +42,8 @@ class CatchTheData extends AbstractController
         else if($type == 'insertnewuser'){
 
         $name = $request->request->get('un', 'this is the default word');
-        
+		$pass = $request->request->get('pw', 'this is the default word');
+        $accT = $request->request->get('accT', 'this is the default word');
       
         
         // to work the objects
@@ -53,7 +53,8 @@ class CatchTheData extends AbstractController
         $login = new Login();
         
         $login->setUsername($name);
-        $login->setPassword('123');
+        $login->setPassword($pass);
+		$login->setAccType($accT);
 
 
       

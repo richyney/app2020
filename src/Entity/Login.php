@@ -25,6 +25,11 @@ class Login
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+	
+	/**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $accType;
 
     public function getId(): ?int
     {
@@ -51,6 +56,18 @@ class Login
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+	
+	 public function getAccType(): ?string
+    {
+        return $this->accType;
+    }
+
+    public function setAccType(string $accType): self
+    {
+        $this->accType = $accType;
 
         return $this;
     }

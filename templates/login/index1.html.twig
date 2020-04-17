@@ -3,7 +3,11 @@
 
 {% block title %}Hello LoginController!{% endblock %}
 
+
 {% block body %}
+
+{% include 'sample/headerTitle.html'%}
+
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
@@ -17,6 +21,19 @@
 
 Username: <input type="text" id="un"/> <br>
 Password: <input type="text" id="pw"/><br>
+<form>
+	<div class="ui-field-contain">
+    	<label for="select-native-1">Basic:</label>
+    		<select name="select-native-1" id="accTypeSelect">
+        		<option value="Customer">Customer</option>
+        		<option value="Manager">Manager</option>
+        		<option value="Driver">Driver</option>
+    	</select>
+	</div>
+</form>
+
+
+
 
         <script>
         function postData(){
@@ -24,6 +41,7 @@ Password: <input type="text" id="pw"/><br>
         // getting the values from the fields        
         var username = $('#un').val();
         var password = $('#pw').val();
+		var accType = $('#accTypeSelect').val()
         
         // validation
         if(username == ""){
@@ -32,9 +50,11 @@ Password: <input type="text" id="pw"/><br>
         
         
             console.log(username);
-            console.log(password);   
+            console.log(password);
+			console.log(accType);
+				
             
-            $.post( "/catchTheData", { type: "insertnewuser", un: username, pw: password})
+            $.post( "/catchTheData", { type: "insertnewuser", un: username, pw: password, accT: accType})
                   .done(function( data ) {
                     alert( "Data Loaded: " + data );
                   });
@@ -52,10 +72,12 @@ Password: <input type="text" id="pw"/><br>
 
         // getting the values from the fields        
         var username = $('#un').val();
+		var password = $('#pw').val();
+		var accType = $('#accTypeSelect').val()
 
       
          // passing it to the catchTheData page for verification  
-        $.post( "/catchTheData", { type: "checkifusernameexists", un: username})
+        $.post( "/catchTheData", { type: "checkifusernameexists", un: username, pw: password, accT: accType})
               .done(function( data ) {
                 alert( "Data Loaded: " + data );
               });
@@ -67,6 +89,14 @@ Password: <input type="text" id="pw"/><br>
 
        }        
         </script>
+		
+
+
+
+
+		
+		
+		
         
         <button onclick="postData()">Post data!</button>
         
