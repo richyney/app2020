@@ -1,10 +1,7 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!{% endblock %}
 
-
-{% block body %}
 
 {% include 'sample/headerTitle.html'%}
 
@@ -16,10 +13,15 @@
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-<div class="example-wrapper">
+  crossorigin="anonymous">
+</script>
 
-Username: <input type="text" id="un"/> <br>
+
+
+
+
+	   <div class="example-wrapper">
+Username: <input type="text" id="un"/><br>
 Password: <input type="text" id="pw"/><br>
 <form>
 	<div class="ui-field-contain">
@@ -32,10 +34,14 @@ Password: <input type="text" id="pw"/><br>
 	</div>
 </form>
 
+     <button onclick="postData()">Post data!</button>
+        
+     <button onclick="check()">Check if user exists</button>
+
+	
 
 
-
-        <script>
+        <script>                                         //Register the user
         function postData(){
 
         // getting the values from the fields        
@@ -54,56 +60,49 @@ Password: <input type="text" id="pw"/><br>
 			console.log(accType);
 				
             
-            $.post( "/catchTheData", { type: "insertnewuser", un: username, pw: password, accT: accType})
+            $.post( "/catchTheData", { type: "registeruser", un: username, pw: password, accT: accType})
                   .done(function( data ) {
                     alert( "Data Loaded: " + data );
                   });
                   
-       }       
-
-        
-        
-        
-        
+       }        
 
        }        
        
-       function check(){
+	      
+	   
+	   
+	   
+        function check(){											//Login the user
 
         // getting the values from the fields        
         var username = $('#un').val();
 		var password = $('#pw').val();
-		var accType = $('#accTypeSelect').val()
-
-      
+		
          // passing it to the catchTheData page for verification  
-        $.post( "/catchTheData", { type: "checkifusernameexists", un: username, pw: password, accT: accType})
-              .done(function( data ) {
+        $.post( "/catchTheData", { type: "loginuser", un: username, pw: password, })
+              .done(function( data ) { //Any data that is returened from the /catchTheData in the backend is stored in the 'data' variable
                 alert( "Data Loaded: " + data );
+				  // based on the user acc type
+                 // send the user to that dash board
+                if(data == 'Customer'){
+                   window.location="/register#customerpage"
+                }
+                else if(data == 'Manager')
+                {
+                    window.location="register#manager"
+                }
+			      else if(data == 'Driver')
+                {
+                    window.location="/login#driver"
+                }
               });
-    
-        
-        
-        
-        
-
        }        
         </script>
 		
 
-
-
-
-		
-		
-		
-        
-        <button onclick="postData()">Post data!</button>
-        
-        
-        
-        <button onclick="check()">Check if user exists</button>
-        
+     
     
 </div>
-{% endblock %}
+
+

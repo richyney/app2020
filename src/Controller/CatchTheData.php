@@ -18,18 +18,19 @@ class CatchTheData extends AbstractController
         $request = Request::createFromGlobals(); // the envelope, and were looking inside it.
 
         $type = $request->request->get('type', 'none');
-        if($type == 'checkifusernameexists'){
+        if($type == 'loginuser'){
             
              // catch the username and password
              $name = $request->request->get('un', 'this is the default word');
+			 $pass = $request->request->get('pw', 'this is the default word');
           
              $repository = $this->getDoctrine()->getRepository(Login::class);
 
           
-             $user = $repository->findOneBy(['username' => $name]);
+             $user = $repository->findOneBy(['username' => $name, 'password' => $pass]); //check if these match what is in the DB
              if($user){
                          return new Response(
-                     'user exists!'
+                     $user->getAccType()
                     );
              } else {
         
@@ -39,7 +40,7 @@ class CatchTheData extends AbstractController
              } 
             
         }
-        else if($type == 'insertnewuser'){
+        else if($type == 'ruser'){
 
         $name = $request->request->get('un', 'this is the default word');
 		$pass = $request->request->get('pw', 'this is the default word');
