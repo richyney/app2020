@@ -73,6 +73,7 @@
 													   <!-- Manager's Dashbaord -->
 
 <div data-role="page" id ="manager" data-theme="a">
+{% include 'sample/headerTitle.html'%}
     	<div data-role="header">
 			<h1>Manager</h1>
 		</div><!--/header -->
@@ -82,6 +83,7 @@
 			<p> some stuff here </p>
 		
 		</div><!-- /content -->
+		{% include 'sample/footer.html'%}	
 </div>
 
 
@@ -91,20 +93,37 @@
 														<!-- Drivers' Dashbaord -->
 
 <div data-role="page" id ="driver" data-theme="a">
+{% include 'sample/headerTitle.html'%}
     	<div data-role="header">
 			<h1>Driver</h1>
 		</div><!--/header -->
 		
 		<div role="main" class="ui-content">
 		
-			<p> some other stuff here </p>
+			  <div id="output"></div>
+  
+  
+  
+    <script>
+  $.getJSON( "http://api.weatherstack.com/current?access_key=654bda0365e92276c315377dea99084b&query=Dublin", function( data ) {
+  
+     console.log(data);
+     
+     console.log(data.current.temperature);
+     var info = data.current.temperature + '<br><img src="' + data.current.weather_icons + '">';
+     
+     $('#output').html(info);
+  });
+  </script>
 		
 		</div><!-- /content -->
+		{% include 'sample/footer.html'%}	
 </div>
 
 
 															 <!-- Register Page -->
 <div data-role="page" id="register" data-theme="a">
+{% include 'sample/headerTitle.html'%}
 
 	<div data-role="header">
 		<h1>Register</h1>
@@ -113,20 +132,23 @@
 		<div role="main" class="ui-content">
 		<h2>Two</h2>
         
-       Username <input type="text" name="username" id="username" value="">
-       Password <input type="text" name="pass" id="pass" value="">
-		<button class="ui-btn">Submit</button>
-		<p>I have an id of "two" on my page container. I'm the second page container in this multi-page template.</p>
-		<p>Notice that the theme is different for this page because we've added a few <code>data-theme</code> swatch assigments here to show off how flexible it is. You can add any content or widget to these pages, but we're keeping these simple.</p>
-		<p><a href="#one" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to page "one"</a></p>
-
+       Username <input type="text" name="username" id="unr" value="">
+       Password <input type="text" name="pass" id="pwr" value="">
+	   <label for="select-native-1">Basic:</label>
+    		<select name="select-native-1" id="accTypeSelect">
+        		<option value="Customer">Customer</option>
+        		<option value="Manager">Manager</option>
+        		<option value="Driver">Driver</option>
+    	</select>
+		<button class="ui-btn" onclick="postData()">Submit</button>
 		</div><!-- /content -->
+		{% include 'sample/footer.html'%}	
 </div>
 
 
 
 
-													      <!-- Login Page -->
+													                 <!-- Login Page -->
 <div data-role="page" id="login" data-theme="a">
 
  {% include 'sample/headerTitle.html'%}
@@ -138,29 +160,91 @@
 		<h2>  Login</h2>
 		
         
-        <input type="text" id="loginUsername"></input>
-        <input type="text" id="loginPassword"></input>
+        <input type="text" id="unl"></input>
+        <input type="text" id="pwl"></input>
            
-        <button id="loginbutton" class="ui-btn">Login</button>
+       
+		<button onclick="check()" class="ui-btn">Login</button>
         
 	</div><!-- /content -->
+	{% include 'sample/footer.html'%}	
 </div>
 
 
 
 
-<script>																		
-$( "#loginbutton" ).click(function() {
-  
-  
-  alert( "Handler for .click() called." );
-   $.mobile.changePage('#customerpage', {
-            changeHash: true,
-            dataUrl: "customerpage",             //the url fragment that will be displayed for the test.html page
-            transition: "slide"                  //if not specified used the default one or the one defined in the default settings
-        });
-});
-</script>
+
+
+        <script>                                                      //Register the user
+        function postData(){
+
+        // getting the values from the fields        
+        var username = $('#unr').val();
+        var password = $('#pwr').val();
+		var accType = $('#accTypeSelect').val()
+        
+        // validation
+        if(username == ""){
+           alert("please enter a username");
+        } else {
+        
+        
+            console.log(username);
+            console.log(password);
+			console.log(accType);
+				
+            
+            $.post( "/catchTheData", { type: "registeruser", un: username, pw: password, accT: accType})
+                  .done(function( data ) {
+                    alert( "Data Loaded: " + data );
+                  });
+                  
+       }        
+
+       }        
+       
+	      
+	   
+        function check(){											//Login the user
+
+        // getting the values from the fields        
+        var username = $('#unl').val();
+		var password = $('#pwl').val();
+		
+         // passing it to the catchTheData page for verification  
+        $.post( "/catchTheData", { type: "loginuser", un: username, pw: password, })
+              .done(function( data ) { //Any data that is returened from the /catchTheData in the backend is stored in the 'data' variable
+                alert( "Data Loaded: " + data );
+				  // based on the user acc type
+                 // send the user to that dash board
+                if(data == 'Customer'){
+                   window.location="/register#customerpage"
+                }
+                else if(data == 'Manager')
+                {
+                    window.location="register#manager"
+                }
+			      else if(data == 'Driver')
+                {
+                    window.location="/register#driver"
+                }
+              });
+       }        
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+     
+        
+
 
 
 
@@ -569,6 +653,16 @@ $( "#dn8min" ).click(function() {
         
 	</div><!-- /content -->
 </div>
+
+	
+
+
+		
+
+     
+    
+</div>
+
 
 </body>
 </html>
