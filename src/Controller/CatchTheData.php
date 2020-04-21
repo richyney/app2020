@@ -72,7 +72,7 @@ class CatchTheData extends AbstractController
        }
         
          return new Response(
-            'it went into the database'
+            'You have been registered. Now you can login'
         );
     }
 }

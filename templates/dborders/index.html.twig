@@ -1,0 +1,49 @@
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  
+  
+  
+  <div id="news">
+  
+  
+  </div>
+  
+  <div id="listOfProducts">
+  lknlnlknln
+  
+  </div>
+  
+  
+  <script>
+  
+  $.post( "/getorders", {})
+  .done(function( data ) {
+
+
+     $('#listOfProducts').html(data);
+
+  });
+  
+  
+  
+  
+   $.getJSON('http://newsapi.org/v2/everything?q=bitcoin&from=2020-03-08&sortBy=publishedAt&apiKey=7c1961d78feb41bc817fd53fc7049fd8', function(data) {
+        
+      console.log(data);
+      
+     $('#news').html(data.articles[0].title);
+      
+    });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </script>

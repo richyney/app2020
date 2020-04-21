@@ -38,6 +38,6 @@ class GetDataController extends AbstractController
         );
     }
 
-    return new Response('Hello there: '.$person->getUsername());
+    return new Response('Welcome back:'.$person->getUsername());
     }
 }

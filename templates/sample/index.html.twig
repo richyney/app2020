@@ -10,14 +10,27 @@
 <div data-role="page" id="one">
 
 	{% include 'sample/headerTitle.html'%}
+	
+	<head><script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' /></head>
 
-	<div role="main" class="ui-content" style ="background-color: white";>
-		<h2>Welcome!</h2>
+	       <div role="main" class="ui-content" data-theme="a" style ="background-color: white; auto;margin-left:auto;margin-right:auto;align:center; text-align:center;";>
+	
+	                       <h2 data-theme="a">Shop online or find a store near you:</h2>
 
+        
+		<div data-theme="a" id='map' style='width: 400px; height: 300px; auto;margin-left:auto;margin-right:auto;align:center;'></div>
+		<script>
+				mapboxgl.accessToken = 'pk.eyJ1IjoicmljaHluZXkiLCJhIjoiY2s5N3l4cHRpMDF6bjNtazR5YXR5cjJxcSJ9.wGC88Jo1qTVNbeCl0BiijQ';
+				var map = new mapboxgl.Map({
+				container: 'map',
+				style: 'mapbox://styles/mapbox/streets-v11'
+				});
+	   </script>
+	
 		<br>
-        Welcome to the application, login or register.
 
-		<h3>Show internal pages:</h3>
+		<h3>Login or register to get some tasty donuts:</h3>
 		<p><a href="#register" class="ui-btn ui-shadow ui-corner-all">Register</a></p>
 		<p><a href="#login" class="ui-btn ui-shadow ui-corner-all">Login</a></p>
 
@@ -134,12 +147,13 @@
         
        Username <input type="text" name="username" id="unr" value="">
        Password <input type="text" name="pass" id="pwr" value="">
-	   <label for="select-native-1">Basic:</label>
+	   <label for="select-native-1">Please select your account type:</label>
     		<select name="select-native-1" id="accTypeSelect">
         		<option value="Customer">Customer</option>
         		<option value="Manager">Manager</option>
         		<option value="Driver">Driver</option>
     	</select>
+<br>
 		<button class="ui-btn" onclick="postData()">Submit</button>
 		</div><!-- /content -->
 		{% include 'sample/footer.html'%}	
@@ -157,7 +171,7 @@
 	</div><!-- /header -->
 
 <div role="main" class="ui-content">
-		<h2>  Login</h2>
+		<h2> Login</h2>
 		
         
         <input type="text" id="unl"></input>
@@ -196,7 +210,8 @@
             
             $.post( "/catchTheData", { type: "registeruser", un: username, pw: password, accT: accType})
                   .done(function( data ) {
-                    alert( "Data Loaded: " + data );
+                    alert( "Success: " + data );
+					window.location="/register#login"
                   });
                   
        }        
@@ -239,17 +254,10 @@
 
 
 
-
-
-
-     
-        
-
-
-
-
-														      <!-- Customer Page -->
+														                 <!-- Customer Page -->
+																		 
 <div data-role="page" id="customerpage" data-theme="a">
+{% include 'sample/headerTitle.html'%}
 <div data-role="header">
 		<h1>Customer page</h1>
 	</div><!-- /header -->
@@ -342,7 +350,8 @@
 	
         
         
-        Total cost: <input type="text" id="currentCost" value="0.00"/>
+       <h2> Total cost: </h2> <input type="text" id="currentCost" value="0.00"/>
+		{% include 'sample/footer.html'%}
         
 
 	</div><!-- /content -->
@@ -652,6 +661,7 @@ $( "#dn8min" ).click(function() {
         
         
 	</div><!-- /content -->
+
 </div>
 
 	
