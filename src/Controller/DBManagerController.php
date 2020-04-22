@@ -11,43 +11,31 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;  
 
    
-class GetOrders extends AbstractController
+class DBManagerController extends AbstractController
 {
     // add in the session bit
    // private $session;
 
-   // public function __construct(SessionInterface $session)
-   // {
-   //     $this->session = $session;
-   // }
-
-
-
-
-
+  //  public function __construct(SessionInterface $session)
+  //  {
+ //       $this->session = $session;
+ //   }
 
 
 
     /**
-     * @Route("/getorders", name="getorders") methods={"GET","POST"}
+     * @Route("/getmanager", name="manager") methods={"GET","POST"}
      */
     public function index()
     {
-        
-        
-       // $this->session->set('delivery', 'yes');
+               
+      //  $this->session->set('delivery', 'yes');
 
         // gets an attribute by name
-        //$del = $this->session->get('delivery');
-       // echo 'the session value is ' . $del;
+      //  $del = $this->session->get('delivery');
+     //   echo 'the session value is ' . $del;
         
-        
-        
-        
-        
-        
-        
-        
+             
                 /*
                 This page is used for getting data from the database.
                 
@@ -58,25 +46,21 @@ class GetOrders extends AbstractController
                 $repository = $this->getDoctrine()->getRepository(Order::class);
                 
                 $p = $repository->findAll();
-				foreach($p as $obj){ // take one object off the array.
-			   
-                  echo '------------------------------';
-                  echo $obj->getReference() .'<br>';
-                  echo $obj->getAddress() . '<br>';
-				  echo $obj->getProducts() .'<br>';
-				  echo $obj->getStatus() .'<br>';
-               }
-				
-				
                 
-               
+                 foreach($p as $obj){ // take one object off the array.
+                    echo '------------------------------';
+                    echo $obj->getName() . '<br>';
+                    echo $obj->getCost() . '<br>';
+                 
+				  
+               }
                    
              //   var_dump($p);
                 
                 // This is the response that we are sending back to the client.
-                return new Response( 
-				
-                        
+                return new Response(
+							
+                       
                     );
     
     }

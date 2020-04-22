@@ -92,6 +92,7 @@
 		</div><!--/header -->
 		
 		<div role="main" class="ui-content">
+	
 		
 			<p> some stuff here </p>
 		
@@ -111,23 +112,31 @@
 			<h1>Driver</h1>
 		</div><!--/header -->
 		
-		<div role="main" class="ui-content">
-		
-			  <div id="output"></div>
+<div id="listOfProducts">  										<!--Products table returned-->
+</div>
   
+  <script>
   
-  
-    <script>
-  $.getJSON( "http://api.weatherstack.com/current?access_key=654bda0365e92276c315377dea99084b&query=Dublin", function( data ) {
-  
-     console.log(data);
-     
-     console.log(data.current.temperature);
-     var info = data.current.temperature + '<br><img src="' + data.current.weather_icons + '">';
-     
-     $('#output').html(info);
+  $.post( "/getorders", {})
+  .done(function( data ) {
+  $('#listOfProducts').html(data);
   });
+  
+  
   </script>
+		
+
+<div role="main" class="ui-content"  style ="background-color: white; auto;margin-left:auto;margin-right:auto;align:center; text-align:center;">          <!--Weather App-->
+		
+		<div id="output"></div>
+		<script>
+		$.getJSON( "http://api.weatherstack.com/current?access_key=654bda0365e92276c315377dea99084b&query=Dublin", function( data ) {
+		console.log(data);
+		console.log(data.current.temperature);
+		var info ='<p>The current temperature is:</p>'+data.current.temperature+'°C <br><p>This is what it looks like outside:</p><img src="' + data.current.weather_icons + '"height="200" width="200">';
+		$('#output').html(info);
+		});
+		</script>
 		
 		</div><!-- /content -->
 		{% include 'sample/footer.html'%}	
@@ -220,7 +229,7 @@
        
 	      
 	   
-        function check(){											//Login the user
+        function check(){											//Login user
 
         // getting the values from the fields        
         var username = $('#unl').val();
