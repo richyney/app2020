@@ -355,22 +355,46 @@
 
 	
 	<br>
+	
 	<br>
 	
         
         
-       <h2> Total cost: </h2> <input type="text" id="currentCost" value="0.00"/>
-		{% include 'sample/footer.html'%}
-        
+       <h2> Total cost: </h2> <input type="text" id="currentCost" value="0.00"/> 
+	   
+	   	   <button onclick="confirmPurchase()" class="ui-btn">confirm</button>
 
+ 	
+	{% include 'sample/footer.html'%}
+		
 	</div><!-- /content -->
-
+	
+<script>           
+function confirmPurchase(){                                          //Send data to the DB 
+			   
+			   // getting the values from the fields        
+        var sendcost = $('#currentCost').val();
+     
+        console.log(sendcost);		
+            
+      $.post( "/processOrder", { type: "processorder", oc: sendcost})
+                  .done(function( data ) {
+                    alert( "Success: " + data );
+					window.location="/register#login"
+                  });            
+       }        
+       
+	   </script>
 
 </div>
 
+ 
+
+
+
 <script>
-// update the total price
-// on the screen
+                                                                       // update the total price
+
 function updatePriceTotal(){
 
     var count1 = $('#d1qty').val();
@@ -393,6 +417,7 @@ function updatePriceTotal(){
     //set the total cost into the total box
      
      $('#currentCost').val(totalCost + '.00');
+	 
      
 }
 
