@@ -21,6 +21,8 @@ class ProcessOrder extends AbstractController
   
 
         $cost = $request->request->get('oc', 'this is the default word');
+		$orderAddress = $request->request->get('sa', 'this is the default word');
+		$orderName = $request->request->get('sn', 'this is the default word');
 	
       
         
@@ -31,6 +33,9 @@ class ProcessOrder extends AbstractController
         $order = new Order();
         
         $order->setcost($cost);
+		$order->setAddress($orderAddress);
+		$order->setName($orderName);
+		$order->setStatus('Waiting');       //Set default as waiting
       
 
 

@@ -64,7 +64,7 @@
 
 
 
-
+																
 <!-- Start of third page: #popup -->
 <div data-role="page" id="popup">
 
@@ -360,7 +360,18 @@
 	
         
         
-       <h2> Total cost: </h2> <input type="text" id="currentCost" value="0.00"/> 
+       <h2> Total cost: </h2> <input type="text"  data-clear-btn="true" id="currentCost" value="0.00"/> 
+	   <br>
+	   <br>
+	   
+	   <label for="text-1">Who is this order for:</label>
+       <input type="text"  name="text-1" id="namePurchase" value="">
+		<br>
+		<br>
+	   
+	   <label for="text-1">Please enter the address you want the donuts delivered to:</label>
+       <input type="text"  data-clear-btn="true" name="text-1" id="addressPurchase" value="">
+
 	   
 	   	   <button onclick="confirmPurchase()" class="ui-btn">confirm</button>
 
@@ -374,10 +385,12 @@ function confirmPurchase(){                                          //Send data
 			   
 			   // getting the values from the fields        
         var sendcost = $('#currentCost').val();
+		var sendadd = $('#namePurchase').val();
+		var sendname = $('#addressPurchase').val();
      
         console.log(sendcost);		
             
-      $.post( "/processOrder", { type: "processorder", oc: sendcost})
+      $.post( "/processOrder", { type: "processorder", oc: sendcost, sa: sendadd, sn: sendname})
                   .done(function( data ) {
                     alert( "Success: " + data );
 					window.location="/register#login"
