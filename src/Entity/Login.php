@@ -30,6 +30,7 @@ class Login
      * @ORM\Column(type="string", length=255)
      */
     private $accType;
+	
 
     public function getId(): ?int
     {
@@ -60,7 +61,8 @@ class Login
         return $this;
     }
 	
-	 public function getAccType(): ?string
+	
+		 public function getAccType(): ?string
     {
         return $this->accType;
     }

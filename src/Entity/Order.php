@@ -38,7 +38,7 @@ class Order
     private $products;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="float")
      */
     private $cost;
 
@@ -100,12 +100,12 @@ class Order
         return $this;
     }
 
-    public function getCost(): ?string
+    public function getCost(): ?float
     {
         return $this->cost;
     }
 
-    public function setCost(string $cost): self
+    public function setCost(float $cost): self
     {
         $this->cost = $cost;
 

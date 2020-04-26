@@ -60,8 +60,8 @@ class GetOrders extends AbstractController
                 $p = $repository->findAll();
 				foreach($p as $obj){ // take one object off the array.
 			   
-                  echo '------------------------------';
-                  echo $obj->getReference() .'<br>';
+                  echo '------------------------------<br>';
+                  echo $obj->getId() .'<br>';
                   echo $obj->getAddress() . '<br>';
 				  echo $obj->getProducts() .'<br>';
 				  echo $obj->getStatus() .'<br>';

@@ -47,7 +47,7 @@ class ProcessOrder extends AbstractController
         
        
         return new Response(
-            'it went into the database'
+            'You have placed an order.'
         );
 
        }

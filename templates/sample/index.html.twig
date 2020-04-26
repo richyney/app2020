@@ -217,7 +217,7 @@
 			console.log(accType);
 				
             
-            $.post( "/catchTheData", { type: "registeruser", un: username, pw: password, accT: accType})
+            $.post( "/catchTheData", { type: "ruser", un: username, pw: password, accT: accType})
                   .done(function( data ) {
                     alert( "Success: " + data );
 					window.location="/register#login"
@@ -385,8 +385,8 @@ function confirmPurchase(){                                          //Send data
 			   
 			   // getting the values from the fields        
         var sendcost = $('#currentCost').val();
-		var sendadd = $('#namePurchase').val();
-		var sendname = $('#addressPurchase').val();
+		var sendadd = $('#addressPurchase').val();
+		var sendname = $('#namePurchase').val();
      
         console.log(sendcost);		
             

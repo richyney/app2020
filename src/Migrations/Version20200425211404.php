@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200415112410 extends AbstractMigration
+final class Version20200425211404 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,8 @@ final class Version20200415112410 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE login ADD PRIMARY KEY (id)');
-        $this->addSql('ALTER TABLE `order` ADD PRIMARY KEY (id)');
+        $this->addSql('CREATE TABLE login (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE `order` (id INT AUTO_INCREMENT NOT NULL, reference BIGINT NOT NULL, name VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL, products VARCHAR(255) NOT NULL, cost VARCHAR(255) NOT NULL, status VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
     }
 
     public function down(Schema $schema) : void
@@ -31,9 +31,7 @@ final class Version20200415112410 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE login MODIFY id INT NOT NULL');
-        $this->addSql('ALTER TABLE login DROP PRIMARY KEY');
-        $this->addSql('ALTER TABLE `order` MODIFY id INT NOT NULL');
-        $this->addSql('ALTER TABLE `order` DROP PRIMARY KEY');
+        $this->addSql('DROP TABLE login');
+        $this->addSql('DROP TABLE `order`');
     }
 }
