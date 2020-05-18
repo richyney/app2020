@@ -61,10 +61,11 @@ class GetOrders extends AbstractController
 				foreach($p as $obj){ // take one object off the array.
 			   
                   echo '------------------------------<br>';
-                  echo $obj->getId() .'<br>';
-                  echo $obj->getAddress() . '<br>';
-				  echo $obj->getProducts() .'<br>';
-				  echo $obj->getStatus() .'<br>';
+                  echo '<b>Reference:</b>'.$obj->getId() .'<br>';
+				  echo '<b>Name:</b>'.$obj->getName() .'<br>';
+                  echo '<b>Address:</b>'.$obj->getAddress() . '<br>';
+				  echo '<b>Order:</b>'.$obj->getProducts() .'<br>';
+				  echo '<b>Status:</b>'.$obj->getStatus() .'<br>';
                }
 				
 				

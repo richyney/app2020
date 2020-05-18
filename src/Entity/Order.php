@@ -47,6 +47,13 @@ class Order
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $otime;
+	
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,4 +130,17 @@ class Order
 
         return $this;
     }
+
+    public function getOtime(): ?\DateTimeInterface
+    {
+        return $this->otime;
+    }
+
+    public function setOtime(?\DateTimeInterface $otime): self
+    {
+        $this->otime = $otime;
+
+        return $this;
+    }
+	
 }

@@ -6,7 +6,7 @@
 
 
 
-													<!-- Home Register/login option: #one -->
+															<!-- Home Register/login option: #one -->
 <div data-role="page" id="one">
 
 	{% include 'sample/headerTitle.html'%}
@@ -30,10 +30,10 @@
 	
 		<br>
 
-		<h3>Login or register to get some tasty donuts:</h3>
+		<h3>Login or register or get the latest donut news:</h3>
 		<p><a href="#register" class="ui-btn ui-shadow ui-corner-all">Register</a></p>
 		<p><a href="#login" class="ui-btn ui-shadow ui-corner-all">Login</a></p>
-
+		<p><a href="#news" class="ui-btn ui-shadow ui-corner-all">News</a></p>
 	</div><!-- /content -->
 
 	{% include 'sample/footer.html'%}	
@@ -44,18 +44,40 @@
 
 
 <!-- Start of second page: #two -->
-<div data-role="page" id="two" data-theme="a">
-	<div data-role="header">
-		<h1>Two</h1>
-	</div><!-- /header -->
+<div data-role="page" id="news" data-theme="a">
+{% include 'sample/headerTitle.html'%}
+<h1 style="text-align: center;">Stay up-to-date with all the latest doughnut happenings</h1>
 
-	<div role="main" class="ui-content">
-		<h2>Two</h2>
-		<p>I have an id of "two" on my page container. I'm the second page container in this multi-page template.</p>
-		<p>Notice that the theme is different for this page because we've added a few <code>data-theme</code> swatch assigments here to show off how flexible it is. You can add any content or widget to these pages, but we're keeping these simple.</p>
-		<p><a href="#one" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to page "one"</a></p>
+<div id="output2" style="text-align: center;">
+  
+  </div>
+  <script>
+//The getJSON function allows us to make a call outside of our server out to somewhere else, such as an API
+// the In this URL, you will see a value "q" is is the query we are making. In this case, we are looking at bitcon.
+// on the far right hand side of this query we are passing the Unique API key that I have for the service, so we
+// can tell the server who are are.
+  $.getJSON( "https://newsapi.org/v2/everything?q=doughnuts&sortBy=publishedAt&apiKey=ad8a47a0a23247678245956c953a4c07", 
+  function( data2 ) {
+     // just to see what the response looks like, we will do a console.log which will dump the entire API response to the console.
+     console.log(data2);
 
-	</div><!-- /content -->
+     // By looking at the structure of the console.log, we can see that in the "data" object that is returned, there are
+     // individual "articles". So we will use a loop to go through these articles.
+      for(var i=0;i<data2.articles.length; i++)
+      {
+        
+        // For each individual news story that we have, we will take one article title at a time
+        // and then append it into the #output div tag at the top of the page.
+        var singleTitle = data2.articles[i].title
+		var description = data2.articles[i].description
+		var singleURL = data2.articles[i].url
+		var image = data2.articles[i].urlToImage
+        $('#output2').append('<b style="font-size: 20px;">'+singleTitle+'<b>' +'&nbsp;&nbsp;<a href="' + singleURL+ '">Link</a>' + '&nbsp;&nbsp;<img src="' + image + '"height="120" width="120"><br><br><br>')
+        
+      }  
+     
+  });
+  </script>
 
 		{% include 'sample/footer.html'%}
 </div><!-- /page two -->
@@ -83,28 +105,508 @@
 
 
 
-													   <!-- Manager's Dashbaord -->
+																<!-- Manager's Dashbaord -->
 
 <div data-role="page" id ="manager" data-theme="a">
 {% include 'sample/headerTitle.html'%}
-    	<div data-role="header">
-			<h1>Manager</h1>
-		</div><!--/header -->
-		
-		<div role="main" class="ui-content">
+
+<head>
+	<title>Line Chart</title>
+	<script src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+	<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+	<script src=""https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+	<style>
 	
+	canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;}
 		
-			<p> some stuff here </p>
+.inner 
+{
+    display: inline-block;
+	width: 40%;
+}
+.containernew
+{  
+    margin: 0px auto;
+    width: 90%;
+}	
+	</style>
+</head>
+
+<div class="containernew">
+   
+
+	<div style="width:35%;" class="inner">
+		<canvas id="canvas"></canvas>
+	</div>
+
+	
+	<script>
+
+		var config1 = {
+			type: 'line',
+			data: {
+				labels: ['Bacon', 'Test', 'March', 'April', 'May', 'June', 'July', 'Test'],
+				datasets: [{
+					label: 'Sales',
+					backgroundColor: window.chartColors.red,
+					borderColor: window.chartColors.red,
+					data: [
+						5,
+                        1,
+                        3,
+                        1,
+                        2,
+                        4,
+                        5,
+                        8
+					],
+					fill: false,
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Chart.js Line Chart'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Month'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Value'
+						}
+					}]
+				}
+			}
+		};
+
+   
 		
-		</div><!-- /content -->
-		{% include 'sample/footer.html'%}	
+	</script>
+
+<div class="inner" style="float: right";>
+
+	<div id="canvas-holder" >
+		<canvas id="chart-area"></canvas>
+	</div>
+	<button id="randomizeData">Randomize Data</button>
+	<button id="addDataset">Add Dataset</button>
+	<button id="removeDataset">Remove Dataset</button>
+	<script>
+		var randomScalingFactor = function() {
+			return Math.round(Math.random() * 100);
+		};
+
+		var config2= {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+					],
+					backgroundColor: [
+						window.chartColors.red,
+						window.chartColors.orange,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.blue,
+					],
+					label: 'Dataset 1'
+				}],
+				labels: [
+					'Red',
+					'Orange',
+					'Yellow',
+					'Green',
+					'Blue'
+				]
+			},
+			options: {
+				responsive: true
+			}
+		};
+
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			config2.data.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return randomScalingFactor();
+				});
+			});
+
+			window.myPie.update();
+		});
+
+		var colorNames = Object.keys(window.chartColors);
+		document.getElementById('addDataset').addEventListener('click', function() {
+			var newDataset = {
+				backgroundColor: [],
+				data: [],
+				label: 'New dataset ' + config2.data.datasets.length,
+			};
+
+			for (var index = 0; index < config2.data.labels.length; ++index) {
+				newDataset.data.push(randomScalingFactor());
+
+				var colorName = colorNames[index % colorNames.length];
+				var newColor = window.chartColors[colorName];
+				newDataset.backgroundColor.push(newColor);
+			}
+
+			config2.data.datasets.push(newDataset);
+			window.myPie.update();
+		});
+
+		document.getElementById('removeDataset').addEventListener('click', function() {
+			config2.data.datasets.splice(0, 1);
+			window.myPie.update();
+		});
+	</script>
+	
+</div>
+</div>
+<br>
+<br>
+
+<br>
+<br>
+
+<div class="containernew">
+   
+
+	<div class="inner" style="width: 35%;">
+		<canvas id="canvas3"></canvas>
+	
+	<button id="randomizeData">Randomize Data</button>
+	<button id="addDataset">Add Dataset</button>
+	<button id="removeDataset">Remove Dataset</button>
+	<button id="addData">Add Data</button>
+	<button id="removeData">Remove Data</button>
+	</div>
+	<script>
+		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		var color = Chart.helpers.color;
+		var horizontalBarChartData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				label: 'Dataset 1',
+				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.red,
+				borderWidth: 1,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				label: 'Dataset 2',
+				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.blue,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}]
+
+		};
+
+
+
+
+	     // making the chart
+		window.onload = function() {
+			var ctx1 = document.getElementById('canvas').getContext('2d');
+			window.myLine = new Chart(ctx1, config1); 
+			var ctx2 = document.getElementById('chart-area').getContext('2d');
+			window.myPie = new Chart(ctx2, config2);// brings it all together.
+	
+			var ctx3 = document.getElementById('canvas3').getContext('2d');
+			window.myHorizontalBar = new Chart(ctx3, {
+				type: 'horizontalBar',
+				data: horizontalBarChartData,
+				options: {
+					// Elements options apply to all of the options unless overridden in a dataset
+					// In this case, we are setting the border of each horizontal bar to be 2px wide
+					elements: {
+						rectangle: {
+							borderWidth: 2,
+						}
+					},
+					responsive: true,
+					legend: {
+						position: 'right',
+					},
+					title: {
+						display: true,
+						text: 'Chart.js Horizontal Bar Chart'
+					}
+				}
+			});
+			
+						var ctx4 = document.getElementById('canvas4').getContext('2d');
+			window.myBar = new Chart(ctx4, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					title: {
+						display: true,
+						text: 'Chart.js Bar Chart - Stacked'
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: false
+					},
+					responsive: true,
+					scales: {
+						xAxes: [{
+							stacked: true,
+						}],
+						yAxes: [{
+							stacked: true
+						}]
+					}
+				}
+			});
+
+		};
+		
+		
+				
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			var zero = Math.random() < 0.2 ? true : false;
+			horizontalBarChartData.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return zero ? 0.0 : randomScalingFactor();
+				});
+
+			});
+			window.myHorizontalBar.update();
+		});
+
+		var colorNames = Object.keys(window.chartColors);
+
+		document.getElementById('addDataset').addEventListener('click', function() {
+			var colorName = colorNames[horizontalBarChartData.datasets.length % colorNames.length];
+			var dsColor = window.chartColors[colorName];
+			var newDataset = {
+				label: 'Dataset ' + (horizontalBarChartData.datasets.length + 1),
+				backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+				borderColor: dsColor,
+				data: []
+			};
+
+			for (var index = 0; index < horizontalBarChartData.labels.length; ++index) {
+				newDataset.data.push(randomScalingFactor());
+			}
+
+			horizontalBarChartData.datasets.push(newDataset);
+			window.myHorizontalBar.update();
+		});
+
+		document.getElementById('addData').addEventListener('click', function() {
+			if (horizontalBarChartData.datasets.length > 0) {
+				var month = MONTHS[horizontalBarChartData.labels.length % MONTHS.length];
+				horizontalBarChartData.labels.push(month);
+
+				for (var index = 0; index < horizontalBarChartData.datasets.length; ++index) {
+					horizontalBarChartData.datasets[index].data.push(randomScalingFactor());
+				}
+
+				window.myHorizontalBar.update();
+			}
+		});
+
+		document.getElementById('removeDataset').addEventListener('click', function() {
+			horizontalBarChartData.datasets.pop();
+			window.myHorizontalBar.update();
+		});
+
+		document.getElementById('removeData').addEventListener('click', function() {
+			horizontalBarChartData.labels.splice(-1, 1); // remove the label first
+
+			horizontalBarChartData.datasets.forEach(function(dataset) {
+				dataset.data.pop();
+			});
+
+			window.myHorizontalBar.update();
+		});
+	</script>
+	
+
+
+<div class="inner" style="float: right";>
+
+	<div style="width: 35%">
+		<canvas id="canvas4"></canvas>
+	</div>
+	<button id="randomizeData">Randomize Data</button>
+	<script>
+		var barChartData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				label: 'Dataset 1',
+				backgroundColor: window.chartColors.red,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				label: 'Dataset 2',
+				backgroundColor: window.chartColors.blue,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				label: 'Dataset 3',
+				backgroundColor: window.chartColors.green,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}]
+
+		};
+
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			barChartData.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return randomScalingFactor();
+				});
+			});
+			window.myBar.update();
+		});
+	</script>
+	
+</div>
 </div>
 
 
 
 
 
-														<!-- Drivers' Dashbaord -->
+
+
+
+
+
+<div id="listOfProducts">  										<!--Products table returned-->
+</div>
+
+<div>
+<h1 style="text-align: center;">Enter the name of the person whose order you wish to delte:</h1>
+<form>
+     <label for="Delete order by name:">Enter name of person you want to delete:</label>
+     <input type="search" name="search-1" id="searchDelete" value="Enter name">
+</form>
+
+<a class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left" onclick="deleteData()">Delete</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		{% include 'sample/footer.html'%}	
+</div>
+
+<script>
+
+	   
+        function deleteData(){				    //Delete Customer
+
+        // getting the values from the fields        
+        var customerName = $('#searchDelete').val();
+		
+         // passing it to the catchTheData page for verification  
+        $.post( "/deleteCustomer", { type: "deleteUser", cn: customerName, })
+              .done(function( data ) { //Any data that is returened from the 
+                alert( "Success:" + data );
+				  // based on the user acc type
+                 // send the user to that dash board
+              
+              });
+       }        
+        </script>
+
+
+
+
+
+																	<!-- Drivers' Dashbaord -->
 
 <div data-role="page" id ="driver" data-theme="a">
 {% include 'sample/headerTitle.html'%}
@@ -143,7 +645,7 @@
 </div>
 
 
-															 <!-- Register Page -->
+																<!-- Register Page -->
 <div data-role="page" id="register" data-theme="a">
 {% include 'sample/headerTitle.html'%}
 

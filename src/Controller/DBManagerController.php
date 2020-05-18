@@ -24,7 +24,7 @@ class DBManagerController extends AbstractController
 
 
     /**
-     * @Route("/getmanager", name="manager") methods={"GET","POST"}
+     * @Route("/manager", name="manager") methods={"GET","POST"}
      */
     public function index()
     {

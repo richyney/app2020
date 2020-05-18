@@ -1,0 +1,37 @@
+<html style="--pulse-color:#fffc0240;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./newsapibla_files/jquery-1.10.2.js.download"></script> 
+<body>
+
+<h1 style="text-align: center;">Stay up-to-date with all the latest doughnut happenings</h1>
+
+<div id="output" style="text-align: center;">
+  
+  </div>
+  <script>
+//The getJSON function allows us to make a call outside of our server out to somewhere else, such as an API
+// the In this URL, you will see a value "q" is is the query we are making. In this case, we are looking at bitcon.
+// on the far right hand side of this query we are passing the Unique API key that I have for the service, so we
+// can tell the server who are are.
+  $.getJSON( "https://newsapi.org/v2/everything?q=doughnuts&sortBy=publishedAt&apiKey=ad8a47a0a23247678245956c953a4c07", 
+  function( data ) {
+     // just to see what the response looks like, we will do a console.log which will dump the entire API response to the console.
+     console.log(data);
+
+     // By looking at the structure of the console.log, we can see that in the "data" object that is returned, there are
+     // individual "articles". So we will use a loop to go through these articles.
+      for(var i=0;i<data.articles.length; i++)
+      {
+        
+        // For each individual news story that we have, we will take one article title at a time
+        // and then append it into the #output div tag at the top of the page.
+        var singleTitle = data.articles[i].title
+		var description = data.articles[i].description
+		var singleURL = data.articles[i].url
+		var image = data.articles[i].urlToImage
+        $('#output').append('<b>'+singleTitle+'<b>' +'&nbsp;&nbsp;<a href="' + singleURL+ '">Link</a>' + '&nbsp;&nbsp;<img src="' + image + '"height="150" width="150"><br><br><br><br>')
+        
+      }  
+     
+  });
+  </script>
+  
+  </body></html>

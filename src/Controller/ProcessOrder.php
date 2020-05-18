@@ -7,7 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Login;
 use App\Entity\Order;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;        
+use Symfony\Component\HttpFoundation\Response;
+       
         
 class ProcessOrder extends AbstractController
 {
@@ -31,12 +32,14 @@ class ProcessOrder extends AbstractController
 
         // create blank entity of type "Login"
         $order = new Order();
+		
+		$time = new \DateTime();
         
         $order->setcost($cost);
 		$order->setAddress($orderAddress);
 		$order->setName($orderName);
-		$order->setStatus('Waiting');       //Set default as waiting
-      
+		$order->setStatus('Getting Ready');		//Set default as waiting
+        $order->setOtime($time);
 
 
       
