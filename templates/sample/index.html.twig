@@ -137,8 +137,9 @@
 
 <div class="containernew">
    
+   <h1 style="text-align: center;">Business Statistics</h1>
 
-	<div style="width:35%;" class="inner">
+	<div style="width:35%;" class="inner">																			<!-- Graph 1-->
 		<canvas id="canvas"></canvas>
 	</div>
 
@@ -203,14 +204,12 @@
 		
 	</script>
 
-<div class="inner" style="float: right";>
+	<div class="inner" style="float: right";>
 
-	<div id="canvas-holder" >
-		<canvas id="chart-area"></canvas>
-	</div>
-	<button id="randomizeData">Randomize Data</button>
-	<button id="addDataset">Add Dataset</button>
-	<button id="removeDataset">Remove Dataset</button>
+		<div id="canvas-holder" >
+			<canvas id="chart-area"></canvas>																					<!-- Graph 2-->
+		</div>
+		<button id="randomizeData">Randomize Data</button>
 	<script>
 		var randomScalingFactor = function() {
 			return Math.round(Math.random() * 100);
@@ -286,11 +285,15 @@
 		});
 	</script>
 	
+	</div>
 </div>
-</div>
-<br>
-<br>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 
@@ -298,13 +301,10 @@
    
 
 	<div class="inner" style="width: 35%;">
-		<canvas id="canvas3"></canvas>
+		<canvas id="canvas3"></canvas>																							<!-- Graph 3-->
 	
-	<button id="randomizeData">Randomize Data</button>
-	<button id="addDataset">Add Dataset</button>
-	<button id="removeDataset">Remove Dataset</button>
-	<button id="addData">Add Data</button>
-	<button id="removeData">Remove Data</button>
+		<button id="randomizeData">Randomize Data</button>
+
 	</div>
 	<script>
 		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -477,13 +477,13 @@
 			window.myHorizontalBar.update();
 		});
 	</script>
-	
 
 
-<div class="inner" style="float: right";>
 
-	<div style="width: 35%">
-		<canvas id="canvas4"></canvas>
+<div class="inner" style="float: right"; style="width: 35%">
+
+	<div>
+		<canvas id="canvas4"></canvas>																							<!-- Graph 4-->
 	</div>
 	<button id="randomizeData">Randomize Data</button>
 	<script>
@@ -540,53 +540,46 @@
 		});
 	</script>
 	
-</div>
-</div>
 
-
-
-
-
-
-
-
-
-
-<div id="listOfProducts">  										<!--Products table returned-->
-</div>
-
-<div>
-<h1 style="text-align: center;">Enter the name of the person whose order you wish to delte:</h1>
-<form>
-     <label for="Delete order by name:">Enter name of person you want to delete:</label>
-     <input type="search" name="search-1" id="searchDelete" value="Enter name">
-</form>
-
-<a class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left" onclick="deleteData()">Delete</a>
 </div>
 
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-		{% include 'sample/footer.html'%}	
+<div class="containernew">
+<h1 style="text-align: center;">Orderes and Option to Delete:</h1>	
+	<div class="inner">
+		<div id="listOfProducts">  																							<!--Products table returned-->
+		</div>
+	</div>	
+	
+	<div class="inner">
+		<h1 style="text-align: center;">Enter the name of the person whose order you wish to delete:</h1>							<!--Delete an order-->
+		<form>
+    		<label for="Delete order by name:">Enter name of person you want to delete:</label>
+    		<input type="search" name="search-1" id="searchDelete" value="Enter name">
+		</form>
+	
+		<a class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left" onclick="deleteData()">Delete</a>
+	</div>
 </div>
 
-<script>
+		
+</div>
+{% include 'sample/footer.html'%}	
+</div>
 
-	   
-        function deleteData(){				    //Delete Customer
+<script>  
+        function deleteData(){				    															//Delete Customer
 
         // getting the values from the fields        
         var customerName = $('#searchDelete').val();
@@ -600,26 +593,51 @@
               
               });
        }        
-        </script>
+</script>
 
 
 
 
 
-																	<!-- Drivers' Dashbaord -->
+																				<!-- Drivers' Dashbaord -->
 
 <div data-role="page" id ="driver" data-theme="a">
 {% include 'sample/headerTitle.html'%}
     	<div data-role="header">
-			<h1>Driver</h1>
+			<h1>Driver Information</h1>
 		</div><!--/header -->
-		
-<div id="listOfProducts">  										<!--Products table returned-->
+<div class="containernew">
+<div id="listOfProducts2" class="inner">  										<!--Products table returned-->
 </div>
+
   
   <script>
+
+$('[id^=statusButton').click(function() {																		//Change status
+  console.log(bla);
   
-  $.post( "/getorders", {})
+      var referenceNumber = $(this).attr('numberOfRef');
+	  
+      
+      
+      // passing it to the catchTheData page for verification  
+        $.post( "/updateStatus", { type: "deleteUser", srn: referenceNumber, })
+              .done(function( data ) { //Any data that is returened from the 
+                alert( "Success:" + data );
+				  // based on the user acc type
+                 // send the user to that dash board
+              
+              });
+  
+});     
+
+  
+  $.post( "/getorders2", {})																				//Drivers Orders List 
+  .done(function( data ) {
+  $('#listOfProducts2').html(data);
+  });
+  
+    $.post( "/getorders", {})																				//Managers Orders List 
   .done(function( data ) {
   $('#listOfProducts').html(data);
   });
@@ -627,21 +645,24 @@
   
   </script>
 		
-
-<div role="main" class="ui-content"  style ="background-color: white; auto;margin-left:auto;margin-right:auto;align:center; text-align:center;">          <!--Weather App-->
+<div class="inner" >  
+<div role="main" class="ui-content"  style ="background-color: white; auto;margin-left:auto;margin-right:auto;align:center; text-align:center; position:absolute; top:300px; right:200px;">          <!--Weather App-->
 		
 		<div id="output"></div>
 		<script>
 		$.getJSON( "http://api.weatherstack.com/current?access_key=654bda0365e92276c315377dea99084b&query=Dublin", function( data ) {
 		console.log(data);
 		console.log(data.current.temperature);
-		var info ='<p>The current temperature is:</p>'+data.current.temperature+'°C <br><p>This is what it looks like outside:</p><img src="' + data.current.weather_icons + '"height="200" width="200">';
+		var info ='<p>The current temperature is:</p>'+data.current.temperature+'°C <br><p>This is what it looks like outside:</p><img src="' + data.current.weather_icons + '"height="300" width="300">';
 		$('#output').html(info);
 		});
 		</script>
 		
 		</div><!-- /content -->
-		{% include 'sample/footer.html'%}	
+		
+</div>
+</div>
+{% include 'sample/footer.html'%}	
 </div>
 
 

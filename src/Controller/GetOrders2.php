@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;  
 
    
-class GetOrders extends AbstractController
+class GetOrders2 extends AbstractController
 {
     // add in the session bit
    // private $session;
@@ -29,7 +29,7 @@ class GetOrders extends AbstractController
 
 
     /**
-     * @Route("/getorders", name="getorders") methods={"GET","POST"}
+     * @Route("/getorders2", name="getorders2") methods={"GET","POST"}
      */
     public function index()
     {
@@ -56,7 +56,7 @@ class GetOrders extends AbstractController
                 */
                 
                 $repository = $this->getDoctrine()->getRepository(Order::class);
-              
+                
                 $p = $repository->findAll();
 				foreach($p as $obj){ // take one object off the array.
 			   
@@ -66,6 +66,7 @@ class GetOrders extends AbstractController
                   echo '<b>Address:</b>'.$obj->getAddress() . '<br>';
 				  echo '<b>Order:</b>'.$obj->getProducts() .'<br>';
 				  echo '<b>Status:</b>'.$obj->getStatus() .'<br>';
+				  echo '<button id="statusButton'.$obj->getId().'" numberOfRef="'.$obj->getId().'">Change'.$obj->getId().'Status</button><br>';
 				  
                }
 				

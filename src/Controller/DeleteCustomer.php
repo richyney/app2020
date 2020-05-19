@@ -17,7 +17,7 @@ class DeleteCustomer extends AbstractController
     {
         $request = Request::createFromGlobals(); // the envelope, and were looking inside it.
             
-             // catch the username and password
+             // catch the customer name
         $name = $request->request->get('cn', 'this is the default word');
 			 
 			 $em = $this->getDoctrine()->getManager();
