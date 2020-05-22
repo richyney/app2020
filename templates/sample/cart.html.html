@@ -1,0 +1,152 @@
+
+<!-- saved from url=(0048)file:///C:/Users/Owner/Downloads/cart%20(1).html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><script src="./cart (1)_files/jquery-3.3.1.js.download" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  
+
+<script>
+// template for a product
+
+class product {
+  constructor(name, price, qty) {
+    this.name = name
+    this.price = price;
+    this.qty = qty;
+  }
+}
+
+
+
+
+
+// define our products
+cookies = new product("cookies", 3.50, 0);
+
+pizza = new product("pizza", 10.50, 0);
+
+bbq = new product("pizza", 10.50, 0);
+
+
+
+var prod = [];
+
+prod.push(cookies);
+prod.push(pizza);
+
+
+
+
+
+</script>
+
+
+
+
+
+
+ </head><body>Add some cookies.. <button id="addProduct1" productname="cookies">Add me</button> 
+                    <button id="removeProduct1">No cookies</button>
+                    <input type="text" id="cookiesQty">    
+
+                    <p>
+                    
+Large Pizza         <button id="addProduct2" productname="pizza">Add me</button> 
+                    <button id="removeProduct2">Remove</button>
+                    <input type="text" id="pizzaQty">    
+                    
+
+                    
+                    </p><p>
+                    
+
+                    
+                    
+                    <button id="viewCart">View Cart</button>
+
+</p><div id="myCart"></div>  
+
+
+
+
+<input type="radio" name="bbq" value="s"> Small<br>
+<input type="radio" name="bbq" value="m"> Medium<br>
+<input type="radio" name="bbq" value="m"> Large
+
+
+
+
+
+          
+<script>
+
+    
+$('[id^=addProduct').click(function(){
+
+    var p = $(this).attr('productname'); // find out what was clicked
+    
+    var arrayLength = prod.length;
+    for (var i = 0; i < arrayLength; i++) { // loop over the products
+        
+        var pro = prod[i] // get one product at a time
+        console.log(pro.name);
+        
+        if(p == pro.name) {
+        
+            console.log(pro.qty);
+            
+            pro.qty = pro.qty + 1;
+            
+              $( "#"+pro.name+"Qty" ).val(pro.qty);
+
+        }
+        //Do something
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+   
+    
+
+    
+});
+
+
+$('[id^=removeProduct').click(function(){
+
+   var p = $(this).attr('productname');
+});
+
+
+
+
+function checkout(){
+
+var ser = '';
+
+ var arrayLength = prod.length;
+    for (var i = 0; i < arrayLength; i++) { // loop over the products
+        
+        var pro = prod[i] // get one product at a time
+        console.log(pro.name);
+        console.log(pro.qty);
+        
+        ser = ser + pro.name + '-' + pro.qty + '=';
+        
+      //
+     }
+
+// jQuery post and send the set.
+console.log(ser);
+}
+
+
+
+</script>
+<button onclick="checkout()">Checkout</button></body></html>

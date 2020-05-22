@@ -43,7 +43,7 @@
 
 
 
-<!-- Start of second page: #two -->
+																																		<!-- News -->
 <div data-role="page" id="news" data-theme="a">
 {% include 'sample/headerTitle.html'%}
 <h1 style="text-align: center;">Stay up-to-date with all the latest doughnut happenings</h1>
@@ -80,7 +80,7 @@
   </script>
 
 		{% include 'sample/footer.html'%}
-</div><!-- /page two -->
+</div><!-- /News -->
 
 
 
@@ -149,7 +149,7 @@
 		var config1 = {
 			type: 'line',
 			data: {
-				labels: ['Bacon', 'Test', 'March', 'April', 'May', 'June', 'July', 'Test'],
+				labels: ['Chocolate', 'Plain', 'Lemon', 'Sprinkle', 'Jam', 'Iced', 'Fanta', 'Sprite'],
 				datasets: [{
 					label: 'Sales',
 					backgroundColor: window.chartColors.red,
@@ -590,8 +590,8 @@
                 alert( "Success:" + data );
 				  // based on the user acc type
                  // send the user to that dash board
-				 window.location="/register#driver"
-              
+				 window.location="/register#managerUpdateSuccess"
+				 window.location.href = "/register#manager";
               });
        }        
 </script>
@@ -631,7 +631,8 @@
                 alert( "Success:" + data );
 				  // based on the user acc type
                  // send the user to that dash board
-              window.location="/register#driver"
+              window.location="/register#driverUpdateSuccess"
+			  window.location.href = "/register#driver";
               });
        }     
 
@@ -779,7 +780,7 @@
          // passing it to the catchTheData page for verification  
         $.post( "/catchTheData", { type: "loginuser", un: username, pw: password, })
               .done(function( data ) { //Any data that is returened from the /catchTheData in the backend is stored in the 'data' variable
-                alert( "Data Loaded: " + data );
+                alert( "Information: " + data );
 				  // based on the user acc type
                  // send the user to that dash board
                 if(data == 'Customer'){
@@ -796,6 +797,85 @@
               });
        }        
         </script>
+
+
+
+
+
+
+
+
+
+
+
+													<!-- Driver's Status update successful -->
+<div data-role="page" id="driverUpdateSuccess" data-theme="a">
+{% include 'sample/headerTitle.html'%}
+<h1 style="text-align: center;">The Order Status has been successfuly updated</h1>
+
+<div id="profits"> </div>
+<div id="weekly"> </div>
+<div id="monthly"> </div>
+
+
+
+
+ <script>
+    $.post( "/getProfits", {})																				//Profits List For graph 
+  .done(function( dataP ) {
+  $('#profits').html(dataP);
+  });
+  
+        $.post( "/getSalesW", {})																				//Weekly List For graph 
+  .done(function( dataW ) {
+  $('#weekly').html(dataW);
+  });
+  
+      $.post( "/getSalesM", {})																				//Monthly List For graph 
+  .done(function( dataM ) {
+  $('#monthly').html(dataM);
+  });
+
+  
+  
+  </script>
+
+
+
+		{% include 'sample/footer.html'%}
+</div>
+
+
+													<!-- Manager's Status update successful -->
+<div data-role="page" id="managerUpdateSuccess" data-theme="a">
+{% include 'sample/headerTitle.html'%}
+<h1 style="text-align: center;">The Order Status has been successfuly deleted</h1>
+
+
+
+		{% include 'sample/footer.html'%}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

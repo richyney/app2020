@@ -1,0 +1,12 @@
+<div id="weekly"> </div>
+<div id="monthly"> </div>
+
+      $.post( "/getSalesW", {})																				//Profits List For graph 
+  .done(function( data ) {
+  $('#weekly').html(data);
+  });
+  
+      $.post( "/getSalesM", {})																				//Profits List For graph 
+  .done(function( data ) {
+  $('#monthly').html(data);
+  });
