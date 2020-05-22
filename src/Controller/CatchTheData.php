@@ -18,28 +18,44 @@ class CatchTheData extends AbstractController
         $request = Request::createFromGlobals(); // the envelope, and were looking inside it.
 
         $type = $request->request->get('type', 'none');
-        if($type == 'loginuser'){
+        if($type == 'loginuser')
+    	{
             
              // catch the username and password
              $name = $request->request->get('un', 'this is the default word');
 			 $pass = $request->request->get('pw', 'this is the default word');
+			 
+			 
+			 $namel = htmlspecialchars($name); //This could be used to protect against Cross-site scripting 
+		     $passl = htmlspecialchars($pass);
+		   
+					if (empty($namel) == FALSE)// This valdidation ensures that some information is entered- potentially a way of sanitising the content but more research needed
+					{
           
-             $repository = $this->getDoctrine()->getRepository(Login::class);
-
-          
-             $user = $repository->findOneBy(['username' => $name, 'password' => $pass]); //check if these match what is in the DB
-             if($user){
-                         return new Response(
-                     $user->getAccType()
-                    );
-             } else {
-        
-                    return new Response(
-                        'doesnt exist'
-                    );
-             } 
-            
-        }
+						$repository = $this->getDoctrine()->getRepository(Login::class);
+						
+						$user = $repository->findOneBy(['username' => $namel, 'password' => $passl]); //check if these match what is in the DB
+						
+						
+								if($user){
+											return new Response( 'Now loggin in to the'.
+											$user->getAccType().'\'s dashboard.');
+										} 
+								else {
+											return new Response(
+											'This user name does not exist');
+									}
+					}
+					else{
+					return new Response('You need to enter a proper name');
+											
+					}
+					
+		}
+		
+		
+		
+		
         else if($type == 'ruser'){
 
         $name = $request->request->get('un', 'this is the default word');

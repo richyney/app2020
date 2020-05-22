@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class UpdateStatus extends AbstractController
 {
      /**
-     * @Route("/updateStatus", name="updateSatus")
+     * @Route("/updateStatus", name="updateSatus") methods={"GET","POST"}
      */
     public function index()
     {
@@ -24,19 +24,14 @@ class UpdateStatus extends AbstractController
         
 			$em = $this->getDoctrine()->getManager();
              $repository = $em->getRepository(Order::class);
-			 $order = $repository->findOneByName($refnum);
+			 $order = $repository->findOneBy(['id' => $refnum]);
         
-        
-        
-      if (!$refnum) {
-        throw $this->createNotFoundException(
-            'No product found for id '.$refnum
-        );
-    }
 
     $order->setStatus('Completed!');
     $em->flush();
-
+	
+	
     return new Response('Status Updated');
+	
     }
 }

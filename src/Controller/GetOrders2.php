@@ -66,7 +66,7 @@ class GetOrders2 extends AbstractController
                   echo '<b>Address:</b>'.$obj->getAddress() . '<br>';
 				  echo '<b>Order:</b>'.$obj->getProducts() .'<br>';
 				  echo '<b>Status:</b>'.$obj->getStatus() .'<br>';
-				  echo '<button id="statusButton'.$obj->getId().'" numberOfRef="'.$obj->getId().'">Change'.$obj->getId().'Status</button><br>';
+				  echo '<button id="statusButton'.$obj->getId().'" numberOfRef="'.$obj->getId().'">Change Status</button><br>';
 				  
                }
 				

@@ -579,7 +579,7 @@
 </div>
 
 <script>  
-        function deleteData(){				    															//Delete Customer
+        function deleteData(){				    																		//Delete Customer
 
         // getting the values from the fields        
         var customerName = $('#searchDelete').val();
@@ -590,6 +590,7 @@
                 alert( "Success:" + data );
 				  // based on the user acc type
                  // send the user to that dash board
+				 window.location="/register#driver"
               
               });
        }        
@@ -606,30 +607,36 @@
     	<div data-role="header">
 			<h1>Driver Information</h1>
 		</div><!--/header -->
+		
+		
 <div class="containernew">
-<div id="listOfProducts2" class="inner">  										<!--Products table returned-->
-</div>
+
+
+	<div id="listOfProducts2" class="inner">  										<!--Products table returned-->
+
+	</div>
 
   
   <script>
 
-$('[id^=statusButton').click(function() {																		//Change status
-  console.log(bla);
-  
-      var referenceNumber = $(this).attr('numberOfRef');
-	  
-      
-      
-      // passing it to the catchTheData page for verification  
-        $.post( "/updateStatus", { type: "deleteUser", srn: referenceNumber, })
+        function changeStatus(){				    																		//Change Status
+
+        // getting the values from the fields        
+        var statusRefNum = $('#changeStatus').val();
+		console.log(statusRefNum);
+		
+         // passing it to the catchTheData page for verification  
+        $.post( "/updateStatus", { type: "deleteUser", srn: statusRefNum, })
               .done(function( data ) { //Any data that is returened from the 
                 alert( "Success:" + data );
 				  // based on the user acc type
                  // send the user to that dash board
-              
+              window.location="/register#driver"
               });
+       }     
+
   
-});     
+    
 
   
   $.post( "/getorders2", {})																				//Drivers Orders List 
@@ -645,22 +652,33 @@ $('[id^=statusButton').click(function() {																		//Change status
   
   </script>
 		
-<div class="inner" >  
-<div role="main" class="ui-content"  style ="background-color: white; auto;margin-left:auto;margin-right:auto;align:center; text-align:center; position:absolute; top:300px; right:200px;">          <!--Weather App-->
+	<div class="inner" >  
+
+		<div role="main" class="ui-content"  style ="background-color: white; auto;margin-left:auto;margin-right:auto;align:center; text-align:center; position:absolute; top:300px; right:200px;">          <!--Weather App-->
 		
-		<div id="output"></div>
-		<script>
-		$.getJSON( "http://api.weatherstack.com/current?access_key=654bda0365e92276c315377dea99084b&query=Dublin", function( data ) {
-		console.log(data);
-		console.log(data.current.temperature);
-		var info ='<p>The current temperature is:</p>'+data.current.temperature+'°C <br><p>This is what it looks like outside:</p><img src="' + data.current.weather_icons + '"height="300" width="300">';
-		$('#output').html(info);
-		});
-		</script>
+			<div id="output"></div>
+			<script>
+			$.getJSON( "http://api.weatherstack.com/current?access_key=654bda0365e92276c315377dea99084b&query=Dublin", function( data ) {
+			console.log(data);
+			console.log(data.current.temperature);
+			var info ='<p>The current temperature is:</p>'+data.current.temperature+'°C <br><p>This is what it looks like outside:</p><img src="' + data.current.weather_icons + '"height="300" width="300">';
+			$('#output').html(info);
+			});
+			</script>
+		</div>
 		
-		</div><!-- /content -->
+		<div style="position:relative; left:120px;">
 		
-</div>
+			<h1 style="text-align: center;">Enter the reference number of the order you wish to change the status on:</h1>			<!--Status Update-->				
+			<form>
+    			<label for="Delete order by name:">Change status on reference number::</label>
+    			<input type="search" name="search-1" id="changeStatus" value="">
+			</form>
+	
+			<button class="ui-btn ui-btn-inline" onclick="changeStatus()">Change Status</a>	
+		</div>
+		
+	</div>
 </div>
 {% include 'sample/footer.html'%}	
 </div>
