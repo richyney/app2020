@@ -32,7 +32,7 @@ class GetSalesM extends AbstractController
                 $repository = $this->getDoctrine()->getRepository(Statistics::class);
                 
                 $p = $repository->findAll();
-				$ret = array();
+				$ret = array ();
 				foreach($p as $obj){ 
 			   
 				$ret[] = $obj->getSalespermth();

@@ -67,42 +67,34 @@ class CatchTheData extends AbstractController
 		
 		
 		
-		$respectN = v::alnum()->validate($name);
-		$respectP = v::stringType()->length(4, 10)->validate($pass);
+		$respectN = v::alpha(' ')->validate($name); //Checks if a string of alpabet characters has been entered
+		$respectP = v::stringType()->length(4, 10)->validate($pass); //Checks for minimum and max number of chars in password
 
-		if ($respectN && $respectP ) {
+		if ($respectN && $respectP ) //Checks the valdidation rules
+		{
 
-		echo "Validation passed";} else {
+		        // to work the objects
+				$entityManager = $this->getDoctrine()->getManager();
 
-		echo "Validation failed";}
-      
+				// create blank entity of type "Login"
+			$login = new Login();
         
-        // to work the objects
-        $entityManager = $this->getDoctrine()->getManager();
+			$login->setUsername($name);
+			$login->setPassword($pass);
+			$login->setAccType($accT);
+    
+			$entityManager->persist($login);
 
-        // create blank entity of type "Login"
-        $login = new Login();
-        
-        $login->setUsername($name);
-        $login->setPassword($pass);
-		$login->setAccType($accT);
-
-
-      
-        $entityManager->persist($login);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
+			// actually executes the queries (i.e. the INSERT query)
+			$entityManager->flush();
         
        
-        return new Response(
-            'it went into the database'
-        );
-
-       }
+			return new Response(
+				'You have now been registered');
+		} 
+		else {echo "Validation failed";} 
+    }
         
-         return new Response(
-            'You have been registered. Now you can login'
-        );
+       
     }
 }

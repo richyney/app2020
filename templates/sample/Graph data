@@ -10,3 +10,27 @@
   .done(function( data ) {
   $('#monthly').html(data);
   });
+  
+  
+      $.post( "/getProfits", {})																				//Profits List For graph 
+  .done(function( dataP ){
+  var obj = JSON.parse(dataP);
+  $('#profits').html(obj);
+  });
+  
+  
+   var profitG =[];
+    $.post( "/getProfits", {})																				//Profits List For graph 
+  .done(function( dataP ){
+  var profitG = JSON.parse(dataP);
+  });
+  
+   <script>
+ var obj = [];
+    $.post( "/getProfits", {})																				//Profits List For graph 
+  .done(function( dataP ){
+  var objA = JSON.parse(dataP);
+  var objB = objA.split(',').map(Number)
+  $('#profits').html(objB);
+  });
+  

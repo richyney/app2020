@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ProcessOrder extends AbstractController
 {
     /**
-     * @Route("/processOrder", name="processorder") methods={"GET","POST"}
+     * @Route("/processOrder", name="processOrder") methods={"GET","POST"}
      */
     public function index()
     {

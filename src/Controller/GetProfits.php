@@ -32,7 +32,7 @@ class GetProfits extends AbstractController
                 $repository = $this->getDoctrine()->getRepository(Statistics::class);
                 
                 $p = $repository->findAll();
-				$ret = array();
+				$ret = array ();
 				foreach($p as $obj){ 
 			   
 				$ret[] = $obj->getProfit();
@@ -45,7 +45,7 @@ class GetProfits extends AbstractController
                
                
                    
-               // var_dump(json_encode($ret));
+               var_dump(json_encode($ret));
                 
                 // This is the response that we are sending back to the client.
                 return new Response( json_encode($ret)

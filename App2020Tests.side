@@ -1,0 +1,77 @@
+{
+  "id": "46887ac6-fc72-4861-aa97-890df90de26b",
+  "version": "2.0",
+  "name": "App2020",
+  "url": "http://127.0.0.1:8000",
+  "tests": [{
+    "id": "fa2c2c9f-d572-46bb-b3ef-ae33bba83532",
+    "name": "NewsCheck",
+    "commands": [{
+      "id": "17c2d106-2800-4c61-89ee-356badc7ec9f",
+      "comment": "",
+      "command": "open",
+      "target": "/register",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6e5b7dea-3add-4f24-bc06-3591787cb391",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x744",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "88cfd21f-0dc2-40c3-a16a-effc43835176",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=News",
+      "targets": [
+        ["linkText=News", "linkText"],
+        ["css=p:nth-child(8) > .ui-btn", "css:finder"],
+        ["xpath=//a[contains(text(),'News')]", "xpath:link"],
+        ["xpath=//div[@id='one']/div[2]/p[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#news')]", "xpath:href"],
+        ["xpath=//p[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'News')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "53921b3d-be6b-4549-8141-4941317daac6",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Link",
+      "targets": [
+        ["linkText=Link", "linkText"],
+        ["css=b:nth-child(1) > b > .ui-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Link')]", "xpath:link"],
+        ["xpath=//div[@id='output2']/b/b/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://bdnews24.com/environment/2020/05/23/the-pandemic-ad-salutes-you')]", "xpath:href"],
+        ["xpath=//b/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Link')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0024c65c-1ff2-4ab6-a790-22403f1888a4",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.inpage-widget-1321588 img",
+      "targets": [
+        ["css=.inpage-widget-1321588 img", "css:finder"],
+        ["xpath=//img[contains(@src,'https://d30fl32nd2baj9.cloudfront.net/media/2017/04/16/1492360615_facebook_circle.png/BINARY/1492360615_facebook_circle.png')]", "xpath:img"],
+        ["xpath=//div[@id='breadcrumb_articlepage']/div[2]/div/div/div[2]/a/img", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div[2]/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "85a6e8e1-2bf9-44eb-8b33-cc21f11be364",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["fa2c2c9f-d572-46bb-b3ef-ae33bba83532"]
+  }],
+  "urls": ["http://127.0.0.1:8000/"],
+  "plugins": []
+}
